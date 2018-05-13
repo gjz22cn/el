@@ -17,6 +17,12 @@ class Ui_LabelModeWindow(object):
         self.graphicsView = QtWidgets.QGraphicsView(self.centralWidget)
         self.graphicsView.setGeometry(QtCore.QRect(50, 70, 551, 361))
         self.graphicsView.setObjectName("graphicsView")
+        
+        self.graphicsView.scene = QtWidgets.QGraphicsScene()
+        item=QtWidgets.QGraphicsPixmapItem(p)
+        self.graphicsView.scene.addItem(item)
+        self.graphicsView.setScene(self.graphicsView.scene)
+        
         self.gridLayoutWidget = QtWidgets.QWidget(self.centralWidget)
         self.gridLayoutWidget.setGeometry(QtCore.QRect(620, 340, 160, 80))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
@@ -45,8 +51,22 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     LabelModeWindow = QtWidgets.QMainWindow()
+
+    
+    image = QtGui.QImage('F:/opencv2/NG/100616.jpg')
+    #w = ui.graphicsView.geometry.Width
+    #h = ui.graphicsView.geometry.Height
+    qimage = image.scaled(551, 361, QtCore.Qt.KeepAspectRatioByExpanding)
+    p = QtGui.QPixmap.fromImage(qimage)
+    
     ui = Ui_LabelModeWindow()
     ui.setupUi(LabelModeWindow)
+    '''
+    p=QtGui.QPixmap(60, 60)
+    p.load('F:/opencv2/NG/100616.jpg') 
+    '''
+    
+    
     LabelModeWindow.show()
     sys.exit(app.exec_())
 
