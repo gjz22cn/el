@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric project file for project el -->
-<!-- Saved: 2018-05-13, 22:13:36 -->
+<!-- Saved: 2018-05-19, 22:52:01 -->
 <!-- Copyright (C) 2018 james,  -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -15,12 +15,17 @@
     <Source>ModeSelect.py</Source>
     <Source>Ui_InspectionMode.py</Source>
     <Source>Ui_LabelMode.py</Source>
+    <Source>Ui_LabelType.py</Source>
+    <Source>Ui_LabelWindow.py</Source>
+    <Source>Ui_MainWidget.py</Source>
     <Source>Ui_ModeSelect.py</Source>
     <Source>__init__.py</Source>
   </Sources>
   <Forms>
     <Form>InspectionMode.ui</Form>
     <Form>LabelMode.ui</Form>
+    <Form>LabelType.ui</Form>
+    <Form>LabelWindow.ui</Form>
     <Form>ModeSelect.ui</Form>
   </Forms>
   <Translations/>
