@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric project file for project el -->
-<!-- Saved: 2018-05-13, 17:39:21 -->
+<!-- Saved: 2018-05-13, 22:13:36 -->
 <!-- Copyright (C) 2018 james,  -->
 <Project version="5.1">
   <Language>en_US</Language>
   <Hash>fff52f9db4c48b9a0d624dde0c5176d7dc1ed946</Hash>
   <ProgLanguage mixed="0">Python3</ProgLanguage>
   <ProjectType>PyQt5</ProjectType>
-  <Description></Description>
   <Version>0.1</Version>
   <Author>james</Author>
   <Email></Email>
   <Sources>
+    <Source>ModeSelect.py</Source>
+    <Source>Ui_InspectionMode.py</Source>
+    <Source>Ui_LabelMode.py</Source>
+    <Source>Ui_ModeSelect.py</Source>
     <Source>__init__.py</Source>
   </Sources>
   <Forms>
+    <Form>InspectionMode.ui</Form>
+    <Form>LabelMode.ui</Form>
     <Form>ModeSelect.ui</Form>
   </Forms>
   <Translations/>
