@@ -39,6 +39,7 @@ class Ui_LabelTypeDialog(object):
         self.retranslateUi(LabelTypeDialog)
         self.pushButton.clicked.connect(LabelTypeDialog.close)
         QtCore.QMetaObject.connectSlotsByName(LabelTypeDialog)
+        self.labelType = ""
 
     def retranslateUi(self, LabelTypeDialog):
         _translate = QtCore.QCoreApplication.translate
