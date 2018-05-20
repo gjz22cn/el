@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>231</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,14 +19,66 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>210</y>
+     <x>150</x>
+     <y>170</y>
      <width>75</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
     <string>确定</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="liefeng">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>70</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>裂缝</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="xuhan">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>70</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>虚焊</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="dixiao">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>70</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>低效</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="duanluduanlu">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>70</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>断路短路</string>
    </property>
   </widget>
  </widget>
@@ -39,12 +91,12 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>198</x>
-     <y>223</y>
+     <x>208</x>
+     <y>183</y>
     </hint>
     <hint type="destinationlabel">
      <x>213</x>
-     <y>233</y>
+     <y>230</y>
     </hint>
    </hints>
   </connection>

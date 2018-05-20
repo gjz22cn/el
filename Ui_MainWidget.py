@@ -54,11 +54,11 @@ class Ui_MainWidget(QTableWidget):
 
     
     def popLabelDialog(self, x, y):
-        print("double1 Click,x="+str(x)+",y="+str(y))
+        print("Click,x="+str(x)+",y="+str(y))
         LabelTypeDialog = QtWidgets.QDialog()
         ui = Ui_LabelTypeDialog()
         ui.setupUi(LabelTypeDialog)
         LabelTypeDialog.show()
         LabelTypeDialog.exec_()
-        print(ui.return_strings())
-        self.setItem(x, y, QtWidgets.QTableWidgetItem(ui.return_strings()))
+        print(ui.getLabelType())
+        self.setItem(x, y, QtWidgets.QTableWidgetItem(ui.getLabelType()))

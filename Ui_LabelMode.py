@@ -52,7 +52,6 @@ class Ui_LabelModeWindow(object):
         self.pushButton_2.setText(_translate("LabelModeWindow", "上一张"))
         self.pushButton_4.setText(_translate("LabelModeWindow", "打开文件夹"))
 
-
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
