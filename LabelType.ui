@@ -16,7 +16,37 @@
   <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>210</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>确定</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>LabelTypeDialog</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>198</x>
+     <y>223</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>213</x>
+     <y>233</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

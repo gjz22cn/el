@@ -14,22 +14,32 @@ class Ui_LabelWindow(object):
         LabelWindow.resize(800, 600)
         self.centralWidget = QtWidgets.QWidget(LabelWindow)
         self.centralWidget.setObjectName("centralWidget")
-        self.MainWidget = QtWidgets.QWidget(self.centralWidget)
-        self.MainWidget.setGeometry(QtCore.QRect(110, 50, 621, 381))
-        self.MainWidget.setObjectName("MainWidget")
-        self.label = QtWidgets.QLabel(self.centralWidget)
-        self.label.setGeometry(QtCore.QRect(250, 500, 54, 12))
-        self.label.setObjectName("label")
+        self.tableWidget = QtWidgets.QTableWidget(self.centralWidget)
+        self.tableWidget.setGeometry(QtCore.QRect(85, 51, 621, 431))
+        self.tableWidget.setRowCount(6)
+        self.tableWidget.setColumnCount(10)
+        self.tableWidget.setObjectName("tableWidget")
+        self.tableWidget.horizontalHeader().setVisible(True)
+        self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
+        self.tableWidget.horizontalHeader().setDefaultSectionSize(480)
+        self.tableWidget.horizontalHeader().setMinimumSectionSize(5)
+        self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
+        self.tableWidget.horizontalHeader().setStretchLastSection(False)
+        self.tableWidget.verticalHeader().setVisible(True)
+        self.tableWidget.verticalHeader().setDefaultSectionSize(480)
+        self.tableWidget.verticalHeader().setStretchLastSection(False)
         LabelWindow.setCentralWidget(self.centralWidget)
 
         self.retranslateUi(LabelWindow)
+        self.tableWidget.itemDoubleClicked.connect(self.test)
         QtCore.QMetaObject.connectSlotsByName(LabelWindow)
 
     def retranslateUi(self, LabelWindow):
         _translate = QtCore.QCoreApplication.translate
         LabelWindow.setWindowTitle(_translate("LabelWindow", "MainWindow"))
-        self.label.setText(_translate("LabelWindow", "haha"))
-
+    
+    def test(self, Item=None):
+        print("adsfa")
 
 if __name__ == "__main__":
     import sys
