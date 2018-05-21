@@ -92,6 +92,7 @@ class Ui_LabelModeWindow(QWidget):
         if not extension == ".jpg":
             return
         self.tableWidget.setStyleSheet("QTableWidget {padding:%dpx %dpx %dpx %dpx; border-image:url(%s)}"%(self.top_margin, self.right_margin, self.buttom_margin, self.left_margin, self.filePath))
+        self.tableWidget.clearAllLabels()
     
     def getFilePathNameExt(self, filename):  
         (filepath,tempfilename) = os.path.split(filename);  

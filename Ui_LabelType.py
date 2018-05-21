@@ -6,9 +6,10 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
+from PyQt5.QtWidgets import QWidget
 
-class Ui_LabelTypeDialog(object):
+class Ui_LabelTypeDialog(QWidget):
     def setupUi(self, LabelTypeDialog):
         LabelTypeDialog.setObjectName("LabelTypeDialog")
         LabelTypeDialog.resize(400, 231)
@@ -40,6 +41,7 @@ class Ui_LabelTypeDialog(object):
         self.pushButton.clicked.connect(LabelTypeDialog.close)
         QtCore.QMetaObject.connectSlotsByName(LabelTypeDialog)
         self.labelType = ""
+        self.LabelTypeDialog = LabelTypeDialog
 
     def retranslateUi(self, LabelTypeDialog):
         _translate = QtCore.QCoreApplication.translate
@@ -52,15 +54,19 @@ class Ui_LabelTypeDialog(object):
             
     def liefengFunc(self):
         self.labelType = "liefeng"
+        self.LabelTypeDialog.close()
             
     def xuhanFunc(self):
         self.labelType = "xuhan"
+        self.LabelTypeDialog.close()
             
     def dixiaoFunc(self):
         self.labelType = "dixiao"
+        self.LabelTypeDialog.close()
             
     def duanluduanluFunc(self):
         self.labelType = "duanluduanlu"
+        self.LabelTypeDialog.close()
     
     def getLabelType(self):
         return self.labelType;
