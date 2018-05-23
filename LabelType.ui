@@ -6,27 +6,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>231</height>
+    <width>404</width>
+    <height>206</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>分类</string>
   </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="good">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>170</y>
-     <width>75</width>
-     <height>23</height>
+     <x>30</x>
+     <y>30</y>
+     <width>70</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="text">
-    <string>确定</string>
+    <string>良品</string>
    </property>
   </widget>
   <widget class="QPushButton" name="liefeng">
@@ -34,58 +34,175 @@
     <rect>
      <x>30</x>
      <y>70</y>
-     <width>75</width>
-     <height>23</height>
+     <width>70</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="text">
     <string>裂缝</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="xuhan">
+  <widget class="QPushButton" name="quejiao">
    <property name="geometry">
     <rect>
      <x>120</x>
      <y>70</y>
-     <width>75</width>
-     <height>23</height>
+     <width>70</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>缺角</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="duanshan">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>70</y>
+     <width>70</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>断栅</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="duanlu">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>110</y>
+     <width>70</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>断路</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="hundang">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>110</y>
+     <width>70</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>混档</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="heixinheiban">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>110</y>
+     <width>70</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>黑心黑斑</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="tongxinyuan">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>110</y>
+     <width>70</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>同心圆</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="xuhan">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>70</y>
+     <width>70</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="text">
     <string>虚焊</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="dixiao">
+  <widget class="QPushButton" name="heibian">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>150</y>
+     <width>70</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>黑边</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="heijiao">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>150</y>
+     <width>70</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>黑角</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="liangban">
    <property name="geometry">
     <rect>
      <x>210</x>
-     <y>70</y>
-     <width>75</width>
-     <height>23</height>
+     <y>150</y>
+     <width>70</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="text">
-    <string>低效</string>
+    <string>亮斑</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="duanluduanlu">
+  <widget class="QPushButton" name="huahen">
    <property name="geometry">
     <rect>
      <x>300</x>
-     <y>70</y>
-     <width>75</width>
-     <height>23</height>
+     <y>150</y>
+     <width>70</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="text">
-    <string>断路短路</string>
+    <string>划痕</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="clear">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>30</y>
+     <width>70</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>清除</string>
    </property>
   </widget>
  </widget>
  <resources/>
  <connections>
   <connection>
-   <sender>pushButton</sender>
+   <sender>good</sender>
    <signal>clicked()</signal>
    <receiver>LabelTypeDialog</receiver>
    <slot>close()</slot>

@@ -1,7 +1,22 @@
-from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QTableWidget
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QTableWidget
+from PyQt5 import QtCore, QtWidgets
+from PyQt5.QtCore import  Qt
 from Ui_LabelType import Ui_LabelTypeDialog
 
+g_labels = [['0_good','良品'], 
+           ['1_liefeng','裂缝'],  
+           ['2_quejiao', "缺角"], 
+           ['3_duanshan',"断栅"], 
+           ['4_xuhan',"虚焊"], 
+           ['5_duanlu',"断路"], 
+           ['6_hundang',"混档"], 
+           ['7_heixinheiban',"黑心黑斑"], 
+           ['8_tongxinyuan',"同心圆"], 
+           ['9_heibian',"黑边" ], 
+           ['10_heijiao', "黑角"], 
+           ['11_liangban', "亮斑"], 
+           ['12_huahen', "划痕"]]
+           
 class Ui_MainWidget(QTableWidget):
     def __init__(self, parent=None):
         super(Ui_MainWidget,self).__init__(parent)
@@ -42,9 +57,13 @@ class Ui_MainWidget(QTableWidget):
         LabelTypeDialog.show()
         LabelTypeDialog.exec_()
         print(ui.getLabelType())
-        self.setItem(x, y, QtWidgets.QTableWidgetItem(ui.getLabelType()))
+        newItem = QtWidgets.QTableWidgetItem(g_labels[ui.getLabelType()][1])
+        newItem.setTextAlignment(Qt.AlignCenter)
+        self.setItem(x, y, newItem)
     
     def clearAllLabels(self):
         for row in range(1, 7):
             for col in range(1, 11):
-                self.setItem(row, col, QtWidgets.QTableWidgetItem(''))
+                newItem = QtWidgets.QTableWidgetItem('')
+                newItem.setTextAlignment(Qt.AlignCenter)
+                self.setItem(row, col, newItem)

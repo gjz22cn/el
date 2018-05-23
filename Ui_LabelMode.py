@@ -10,6 +10,21 @@ from PyQt5 import QtCore, QtWidgets
 from Ui_MainWidget import Ui_MainWidget
 from PyQt5.QtWidgets import QFileDialog, QWidget
 
+g_labels = [['0_good','良品'], 
+           ['1_liefeng','裂缝'],  
+           ['2_quejiao', "缺角"], 
+           ['3_duanshan',"断栅"], 
+           ['4_xuhan',"虚焊"], 
+           ['5_duanlu',"断路"], 
+           ['6_hundang',"混档"], 
+           ['7_heixinheiban',"黑心黑斑"], 
+           ['8_tongxinyuan',"同心圆"], 
+           ['9_heibian',"黑边" ], 
+           ['10_heijiao', "黑角"], 
+           ['11_liangban', "亮斑"], 
+           ['12_huahen', "划痕"], 
+           ['', '']]
+           
 class Ui_LabelModeWindow(QWidget):
     def setupUi(self, LabelModeWindow):
         g_width,  g_height= 4896,  3034
