@@ -70,6 +70,7 @@ class Ui_LabelModeWindow(QWidget):
         self.retranslateUi(LabelModeWindow)
         QtCore.QMetaObject.connectSlotsByName(LabelModeWindow)
         self.picDir = ''
+        self.filePath = 'F:/code/python/el/sample.jpg'
 
     def retranslateUi(self, LabelModeWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -102,12 +103,14 @@ class Ui_LabelModeWindow(QWidget):
         self.loadPic()
         
     def loadPic(self): 
+        oldFile = self.filePath
         self.filePath = self.picDir+'/'+self.fileList[self.fileIndex]
         filepath,shortname,extension = self.getFilePathNameExt(self.filePath)
         if not extension == ".jpg":
             return
         self.tableWidget.setStyleSheet("QTableWidget {padding:%dpx %dpx %dpx %dpx; border-image:url(%s)}"%(self.top_margin, self.right_margin, self.buttom_margin, self.left_margin, self.filePath))
-        self.tableWidget.clearAllLabels()
+        #self.tableWidget.clearAllLabels()
+        self.tableWidget.preparePieces(oldFile)
     
     def getFilePathNameExt(self, filename):  
         (filepath,tempfilename) = os.path.split(filename);  
