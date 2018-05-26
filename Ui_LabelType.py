@@ -6,11 +6,12 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 from functools import partial
 
 class Ui_LabelTypeDialog(object):
     def setupUi(self, LabelTypeDialog):
+        self.labelType = 13
         self.LabelTypeDialog = LabelTypeDialog
         LabelTypeDialog.setObjectName("LabelTypeDialog")
         LabelTypeDialog.resize(404, 206)

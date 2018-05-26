@@ -82,13 +82,13 @@ class Ui_MainWidget(QTableWidget):
         newItem = QtWidgets.QTableWidgetItem(g_labels[typeLabel][1])
         newItem.setTextAlignment(Qt.AlignCenter)
         self.setItem(x, y, newItem)
-        g_record[x-1][y-1] = typeLabel
+        g_record[x][y] = typeLabel
         if typeLabel == 13:
-            g_record[x-1][y-1] = -1
+            g_record[x][y] = -1
     
     def clearAllLabels(self):
-        for row in range(1, 7):
-            for col in range(1, 11):
+        for row in range(0, 6):
+            for col in range(0, 10):
                 newItem = QtWidgets.QTableWidgetItem('')
                 newItem.setTextAlignment(Qt.AlignCenter)
                 self.setItem(row, col, newItem)
@@ -143,4 +143,3 @@ class Ui_MainWidget(QTableWidget):
             start_y += step_y
         
         self.clearAllLabels()
-        

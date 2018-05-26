@@ -7,24 +7,19 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtWidgets
-from Ui_MainWidget import Ui_MainWidget
 from PyQt5.QtWidgets import QWidget
+#from ModeSelect import Ui_MainWidget
 
 class Ui_LabelModeWindow(QWidget):
     def setupUi(self, LabelModeWindow):
         LabelModeWindow.setObjectName("LabelModeWindow")
-        LabelModeWindow.resize(self.width+2*self.hMargin, self.height+2*self.vMargin)
+        LabelModeWindow.resize(self.area.width+2*self.area.hMargin, self.area.height+2*self.area.vMargin)
 
         self.centralWidget = QtWidgets.QWidget(LabelModeWindow)
         self.centralWidget.setObjectName("centralWidget")
-        #self.mainWidget = QtWidgets.QTableWidget(self.centralWidget)
-        self.mainWidget = Ui_MainWidget(self.centralWidget)
-        self.mainWidget.setGeometry(QtCore.QRect(self.hMargin, 30, self.width, self.height))
-        self.mainWidget.setObjectName("mainWidget")
-        self.mainWidget.setColumnCount(self.colCnt)
-        self.mainWidget.setRowCount(self.rowCnt)
+        
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralWidget)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(self.hMargin, self.height+40, self.width, 40))
+        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(self.area.hMargin, self.area.height+40, self.area.width, 40))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -54,7 +49,7 @@ class Ui_LabelModeWindow(QWidget):
         
         self.horizontalLayout.addWidget(self.nextPicBtn)
         self.horizontalLayoutWidget_2 = QtWidgets.QWidget(self.centralWidget)
-        self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(2, self.height+90, self.width+2*self.hMargin-4, 26))
+        self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(2, self.area.height+90, self.area.width+2*self.area.hMargin-4, 26))
         self.horizontalLayoutWidget_2.setObjectName("horizontalLayoutWidget_2")
         self.infoLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_2)
         self.infoLayout.setContentsMargins(0, 0, 0, 0)
