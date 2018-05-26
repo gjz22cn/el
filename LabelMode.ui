@@ -51,20 +51,6 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="winSizeBtn1">
-       <property name="text">
-        <string>小窗口</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="winSizeBtn2">
-       <property name="text">
-        <string>大窗口</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="openDirBtn">
        <property name="text">
         <string>打开文件夹</string>
@@ -72,7 +58,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="saveDirBtn">
        <property name="text">
         <string>选择保存目录</string>
        </property>
@@ -125,6 +111,16 @@
        </property>
        <property name="margin">
         <number>6</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="statusLabel">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
       </widget>
      </item>

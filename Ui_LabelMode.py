@@ -8,16 +8,14 @@
 
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QWidget
-#from ModeSelect import Ui_MainWidget
 
 class Ui_LabelModeWindow(QWidget):
     def setupUi(self, LabelModeWindow):
         LabelModeWindow.setObjectName("LabelModeWindow")
         LabelModeWindow.resize(self.area.width+2*self.area.hMargin, self.area.height+2*self.area.vMargin)
-
         self.centralWidget = QtWidgets.QWidget(LabelModeWindow)
         self.centralWidget.setObjectName("centralWidget")
-        
+
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.centralWidget)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(self.area.hMargin, self.area.height+40, self.area.width, 40))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
@@ -26,18 +24,12 @@ class Ui_LabelModeWindow(QWidget):
         self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.winSizeBtn1 = QtWidgets.QPushButton(self.horizontalLayoutWidget)
-        self.winSizeBtn1.setObjectName("winSizeBtn1")
-        self.horizontalLayout.addWidget(self.winSizeBtn1)
-        self.winSizeBtn2 = QtWidgets.QPushButton(self.horizontalLayoutWidget)
-        self.winSizeBtn2.setObjectName("winSizeBtn2")
-        self.horizontalLayout.addWidget(self.winSizeBtn2)
         self.openDirBtn = QtWidgets.QPushButton(self.horizontalLayoutWidget)
         self.openDirBtn.setObjectName("openDirBtn")
         self.horizontalLayout.addWidget(self.openDirBtn)
-        self.pushButton_3 = QtWidgets.QPushButton(self.horizontalLayoutWidget)
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.horizontalLayout.addWidget(self.pushButton_3)
+        self.saveDirBtn = QtWidgets.QPushButton(self.horizontalLayoutWidget)
+        self.saveDirBtn.setObjectName("saveDirBtn")
+        self.horizontalLayout.addWidget(self.saveDirBtn)
         self.saveBtn = QtWidgets.QPushButton(self.horizontalLayoutWidget)
         self.saveBtn.setObjectName("saveBtn")
         self.horizontalLayout.addWidget(self.saveBtn)
@@ -46,7 +38,6 @@ class Ui_LabelModeWindow(QWidget):
         self.horizontalLayout.addWidget(self.prePicBtn)
         self.nextPicBtn = QtWidgets.QPushButton(self.horizontalLayoutWidget)
         self.nextPicBtn.setObjectName("nextPicBtn")
-        
         self.horizontalLayout.addWidget(self.nextPicBtn)
         self.horizontalLayoutWidget_2 = QtWidgets.QWidget(self.centralWidget)
         self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(2, self.area.height+90, self.area.width+2*self.area.hMargin-4, 26))
@@ -60,6 +51,11 @@ class Ui_LabelModeWindow(QWidget):
         self.saveDirLabel = QtWidgets.QLabel(self.horizontalLayoutWidget_2)
         self.saveDirLabel.setObjectName("saveDirLabel")
         self.infoLayout.addWidget(self.saveDirLabel)
+        self.statusLabel = QtWidgets.QLabel(self.horizontalLayoutWidget_2)
+        self.statusLabel.setText("")
+        self.statusLabel.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.statusLabel.setObjectName("statusLabel")
+        self.infoLayout.addWidget(self.statusLabel)
         LabelModeWindow.setCentralWidget(self.centralWidget)
 
         self.retranslateUi(LabelModeWindow)
@@ -68,10 +64,8 @@ class Ui_LabelModeWindow(QWidget):
     def retranslateUi(self, LabelModeWindow):
         _translate = QtCore.QCoreApplication.translate
         LabelModeWindow.setWindowTitle(_translate("LabelModeWindow", "太阳能电池板检测系统-标签模式"))
-        self.winSizeBtn1.setText(_translate("LabelModeWindow", "小窗口"))
-        self.winSizeBtn2.setText(_translate("LabelModeWindow", "大窗口"))
         self.openDirBtn.setText(_translate("LabelModeWindow", "打开文件夹"))
-        self.pushButton_3.setText(_translate("LabelModeWindow", "选择保存目录"))
+        self.saveDirBtn.setText(_translate("LabelModeWindow", "选择保存目录"))
         self.saveBtn.setText(_translate("LabelModeWindow", "保存"))
         self.prePicBtn.setText(_translate("LabelModeWindow", "上一张"))
         self.nextPicBtn.setText(_translate("LabelModeWindow", "下一张"))

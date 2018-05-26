@@ -29,18 +29,8 @@ g_rows = 6
 g_cols = 10
 g_padding = 0
 
-g_w = 8
-g_v_width = int(g_width/g_w)
-g_v_height = int(g_height/g_w)
-g_v_top_margin = int(g_top_margin/g_w)
-g_v_right_margin = int(g_right_margin/g_w)
-g_v_buttom_margin = int(g_buttom_margin/g_w)
-g_v_left_margin = int(g_left_margin/g_w)
-g_v_piece_size = int(480/g_w)
+g_record = np.zeros((g_rows,g_cols))
 
-g_record = np.zeros((6,10))
-g_el_dir = 'E:/el/'
-g_label_dir = g_el_dir+'labels/'
 
 g_labels = [['0_good','良品'], 
            ['1_liefeng','裂缝'],  
@@ -98,6 +88,9 @@ class Ui_MainWidget(QTableWidget):
         #self.setObjectName("myQWidget")
         
         self.area = area
+        self.saveDir = 'E:/'
+        self.dataDir = self.saveDir + 'el_data/'
+        self.labelCnt = 13
         
         self.setGeometry(QtCore.QRect(0, 0, area.width, area.height))
         self.setColumnCount(area.cols)
@@ -113,8 +106,11 @@ class Ui_MainWidget(QTableWidget):
         self.cellClicked.connect(self.popLabelDialog)
         
         self.clearAllLabels()
-        self.prePareDir()
-
+        
+    def setSaveDir(self, saveDir):
+        self.saveDir = saveDir
+        self.dataDir = self.saveDir + 'el_data/'
+        self.prepareDir()
     
     def popLabelDialog(self, x, y):
         print("Click,x="+str(x)+",y="+str(y))
@@ -130,7 +126,7 @@ class Ui_MainWidget(QTableWidget):
         newItem.setTextAlignment(Qt.AlignCenter)
         self.setItem(x, y, newItem)
         g_record[x][y] = typeLabel
-        if typeLabel == 13:
+        if typeLabel == self.labelCnt:
             g_record[x][y] = -1
     
     def clearAllLabels(self):
@@ -152,21 +148,21 @@ class Ui_MainWidget(QTableWidget):
         (shotname,extension) = os.path.splitext(tempfilename);  
         return filepath,shotname,extension
         
-    def prePareDir(self):
-        if not os.path.isdir(g_el_dir):
-            os.mkdir(g_el_dir)
+    def prepareDir(self):
+        if not os.path.isdir(self.saveDir):
+            os.mkdir(self.saveDir)
             
-        if not os.path.isdir(g_label_dir):
-            os.mkdir(g_label_dir)
+        if not os.path.isdir(self.dataDir):
+            os.mkdir(self.dataDir)
             
-        for i in range(0, 12):
-            dir_name = g_label_dir + g_labels[i][0]
+        for i in range(0, self.labelCnt):
+            dir_name = self.dataDir + g_labels[i][0]
             if not os.path.isdir(dir_name):
                 os.mkdir(dir_name)
     
     def clearPreResults(self, shortname):
-        for i in range(0, 12):
-            dir_name = g_label_dir + g_labels[i][0]
+        for i in range(0, self.labelCnt):
+            dir_name = self.dataDir + g_labels[i][0]
             fileList = os.listdir(dir_name)
             fileCnt = len(fileList)
             for j in range(0, fileCnt):
@@ -193,13 +189,12 @@ class Ui_MainWidget(QTableWidget):
                 if (g_record[row][col] != -1):
                     print("g_record[%d][%d]"%(row, col)+str(g_record[row][col]))
                     piece_file_name = shortname + "_" + str(row+1) + "_" + str(col+1) + extension
-                    piece_file_name = g_label_dir+g_labels[int(g_record[row][col])][0] + '/' + piece_file_name
+                    piece_file_name = self.dataDir+g_labels[int(g_record[row][col])][0] + '/' + piece_file_name
                     new_img = img_ori[start_y-g_padding:start_y+step_y+g_padding, start_x-g_padding:start_x+step_x+g_padding]
                     cv2.imwrite(piece_file_name, new_img)
                 start_x += step_x
             start_y += step_y
-        
-        self.clearAllLabels()
+
  
  
  
@@ -215,7 +210,7 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
         self.fileIndex = 0
         self.picDir = ''
         self.filePath = ''
-        
+        self.saveDir = 'E:/'
         super(LabelModeWindow,self).__init__()
         
     def display(self, modeSelect):
@@ -231,28 +226,38 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
         self.setFixedSize(self.area.width+2*self.area.hMargin, self.area.height+2*self.area.vMargin)
         
         self.openDirBtn.clicked.connect(self.openPicDir)
+        self.saveDirBtn.clicked.connect(self.openSaveDir)
         self.saveBtn.clicked.connect(self.savePieces)
         self.prePicBtn.clicked.connect(self.prePic)
         self.nextPicBtn.clicked.connect(self.nextPic)
         
+        if os.path.isdir(self.saveDir):
+            self.mainWidget.setSaveDir(self.saveDir)
+            self.saveDirLabel.setText("保存目录： "+self.saveDir)
+        else:
+            self.saveDirLabel.setText("保存目录： 错误")
+        
         self.show()
     
+    # 打开文件夹
     def openPicDir(self):
-         self.picDir = QFileDialog.getExistingDirectory(self, "打开图片文件夹", "F:/")
+         self.picDir = QFileDialog.getExistingDirectory(self, "打开图片文件夹", self.saveDir)
          print(self.picDir)
          self.fileList = os.listdir(self.picDir)
          self.fileCnt = len(self.fileList)
          self.fileIndex = -1
          self.nextPic()
-                
-    def nextPic(self):
-        if self.picDir == '':
-            return
-        self.fileIndex = self.fileIndex + 1
-        if self.fileIndex == self.fileCnt:
-            self.fileIndex = self.fileCnt -1
-        self.loadPic()
-        
+    
+    # 选择保存目录
+    def openSaveDir(self):
+        self.saveDir = QFileDialog.getExistingDirectory(self, "打开结果保存文件夹", self.saveDir)
+        if os.path.isdir(self.saveDir):
+            self.mainWidget.setSaveDir(self.saveDir)
+            self.saveDirLabel.setText("保存目录： "+self.saveDir)
+        else:
+            self.saveDirLabel.setText("保存目录： 错误")
+    
+    #上一张
     def prePic(self):
         if self.picDir == '':
             return
@@ -261,14 +266,23 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
             self.fileIndex = 0
         self.loadPic()
         
+    #下一张
+    def nextPic(self):
+        if self.picDir == '':
+            return
+        self.fileIndex = self.fileIndex + 1
+        if self.fileIndex == self.fileCnt:
+            self.fileIndex = self.fileCnt -1
+        self.loadPic()
+        
     def loadPic(self): 
         self.filePath = self.picDir+'/'+self.fileList[self.fileIndex]
         filepath,shortname,extension = self.getFilePathNameExt(self.filePath)
         if not extension == ".jpg":
             return
         self.mainWidget.setStyleSheet("QTableWidget {padding:%dpx %dpx %dpx %dpx; border-image:url(%s)}"%(self.area.top_margin, self.area.right_margin, self.area.buttom_margin, self.area.left_margin, self.filePath))
-        #self.tableWidget.clearAllLabels()
         self.fileLabel.setText("文件名： "+self.filePath)
+        self.mainWidget.clearAllLabels()
         
     
     def getFilePathNameExt(self, filename):  
@@ -276,9 +290,21 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
         (shotname,extension) = os.path.splitext(tempfilename);  
         return filepath,shotname,extension
     
+    # 保存
     def savePieces(self):
+        self.statusLabel.setText("开始保存")
         self.mainWidget.preparePieces(self.filePath)
+        self.statusLabel.setText("保存结束")
+        self.mainWidget.nextPic()
+        self.statusLabel.setText("")
+        
 
+
+#####################################
+#    生产模式主窗口（未开发）
+#     width： 图片区域宽度
+#     heiht:   图片区域高度
+#####################################
 class InspectionModeWindow(QMainWindow,Ui_InspectionModeWindow):
     def __init__(self):
         super(InspectionModeWindow,self).__init__()
