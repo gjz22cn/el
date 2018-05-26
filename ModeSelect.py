@@ -86,6 +86,9 @@ class MainAreaSize():
         self.w = w
         self.recalcSize()
 
+
+
+
 #####################################
 #   图片操作区域
 #####################################
@@ -160,12 +163,22 @@ class Ui_MainWidget(QTableWidget):
             dir_name = g_label_dir + g_labels[i][0]
             if not os.path.isdir(dir_name):
                 os.mkdir(dir_name)
-            
+    
+    def clearPreResults(self, shortname):
+        for i in range(0, 12):
+            dir_name = g_label_dir + g_labels[i][0]
+            fileList = os.listdir(dir_name)
+            fileCnt = len(fileList)
+            for j in range(0, fileCnt):
+                if fileList[j].startswith(shortname+"_"):
+                    os.remove(dir_name+'/'+fileList[j])
+
+        
     def preparePieces(self, filename):
         filepath,shortname,extension = self.getFilePathNameExt(filename)
         if not extension == ".jpg":
             return
-        
+        self.clearPreResults(shortname)
         img_ori = cv2.imread(filename)
         step_x = int((g_width - g_left_margin - g_right_margin)/g_cols)
         step_y = int((g_height - g_top_margin - g_buttom_margin)/g_rows)
@@ -187,6 +200,9 @@ class Ui_MainWidget(QTableWidget):
             start_y += step_y
         
         self.clearAllLabels()
+ 
+ 
+ 
  
 #####################################
 #    标签模式主窗口
@@ -304,20 +320,14 @@ class ModeSelect(QDialog, Ui_Dialog):
     def getAreaInfo(self):
         return self.area
 
-def enterProductMode():
-    inspectionModeWindow = InspectionModeWindow()
-    inspectionModeWindow.display()
 
-def enterLabelMode():
-    print("enterLabelMode()")
-    labelModeWindow = LabelModeWindow()
-    labelModeWindow.display()
     
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     inspectionModeWindow = InspectionModeWindow()
     labelModeWindow = LabelModeWindow()
     dlg = ModeSelect()
+    dlg.setWindowFlags(Qt.WindowCloseButtonHint);
     dlg.productBtn.clicked.connect(inspectionModeWindow.display)
     dlg.labelBtn.clicked.connect(partial(labelModeWindow.display, dlg))
     dlg.show()

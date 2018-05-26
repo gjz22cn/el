@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>太阳能电池板检测系统-工作模式选择</string>
   </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>
@@ -19,7 +19,7 @@
   <widget class="QPushButton" name="productBtn">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>320</x>
      <y>270</y>
      <width>100</width>
      <height>50</height>
@@ -35,7 +35,7 @@
   <widget class="QPushButton" name="labelBtn">
    <property name="geometry">
     <rect>
-     <x>320</x>
+     <x>160</x>
      <y>270</y>
      <width>100</width>
      <height>50</height>
@@ -97,12 +97,12 @@
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QRadioButton" name="windowSize2">
+     <widget class="QRadioButton" name="windowSize1">
       <property name="styleSheet">
        <string notr="true">font: 14pt &quot;AcadEref&quot;;</string>
       </property>
       <property name="text">
-       <string>大窗口</string>
+       <string>小窗口</string>
       </property>
      </widget>
     </item>
@@ -120,12 +120,12 @@
      </spacer>
     </item>
     <item>
-     <widget class="QRadioButton" name="windowSize1">
+     <widget class="QRadioButton" name="windowSize2">
       <property name="styleSheet">
        <string notr="true">font: 14pt &quot;AcadEref&quot;;</string>
       </property>
       <property name="text">
-       <string>小窗口</string>
+       <string>大窗口</string>
       </property>
      </widget>
     </item>
