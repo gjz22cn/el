@@ -6,67 +6,130 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1433</width>
-    <height>785</height>
+    <width>629</width>
+    <height>537</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>太阳能电池板检测系统-标签模式</string>
   </property>
   <widget class="QWidget" name="centralWidget">
+   <widget class="QTableWidget" name="mainWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>581</width>
+      <height>311</height>
+     </rect>
+    </property>
+   </widget>
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>1250</x>
-      <y>710</y>
-      <width>160</width>
-      <height>41</height>
+      <x>18</x>
+      <y>360</y>
+      <width>591</width>
+      <height>25</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <spacer name="btnLeftSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="winSizeBtn1">
        <property name="text">
-        <string>下一张</string>
+        <string>小窗口</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="winSizeBtn2">
+       <property name="text">
+        <string>大窗口</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="openDirBtn">
+       <property name="text">
+        <string>打开文件夹</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_3">
+       <property name="text">
+        <string>选择保存目录</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="saveBtn">
+       <property name="text">
+        <string>保存</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="prePicBtn">
        <property name="text">
         <string>上一张</string>
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="nextPicBtn">
+       <property name="text">
+        <string>下一张</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QWidget" name="horizontalLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>1250</x>
-      <y>670</y>
-      <width>75</width>
-      <height>23</height>
+      <x>0</x>
+      <y>430</y>
+      <width>631</width>
+      <height>80</height>
      </rect>
     </property>
-    <property name="text">
-     <string>打开文件夹</string>
-    </property>
+    <layout class="QHBoxLayout" name="infoLayout">
+     <item>
+      <widget class="QLabel" name="fileLabel">
+       <property name="text">
+        <string>文件名： </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="saveDirLabel">
+       <property name="text">
+        <string>保存目录： </string>
+       </property>
+       <property name="margin">
+        <number>6</number>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
-   <widget class="QTableWidget" name="tableWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>1224</width>
-      <height>758</height>
-     </rect>
-    </property>
-   </widget>
-   <zorder>horizontalLayoutWidget</zorder>
-   <zorder>pushButton_4</zorder>
-   <zorder>tableWidget</zorder>
-   <zorder>pushButton_2</zorder>
   </widget>
  </widget>
  <resources/>

@@ -61,7 +61,7 @@ class Ui_MainWidget(QTableWidget):
         self.horizontalHeader().setDefaultSectionSize(self.piece_size)
         self.verticalHeader().setVisible(False)
         self.verticalHeader().setDefaultSectionSize(self.piece_size)
-        self.setStyleSheet("QTableWidget {padding:%dpx %dpx %dpx %dpx; border-image:url(F:/code/python/el/sample.jpg)}"%(self.top_margin, self.right_margin, self.buttom_margin, self.left_margin));
+        #self.setStyleSheet("QTableWidget {padding:%dpx %dpx %dpx %dpx; border-image:url(F:/code/python/el/sample.jpg)}"%(self.top_margin, self.right_margin, self.buttom_margin, self.left_margin));
         self.setEditTriggers(QTableWidget.NoEditTriggers)
         self.cellClicked.connect(self.popLabelDialog)
         
