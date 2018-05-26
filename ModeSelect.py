@@ -11,7 +11,7 @@ from functools import partial
 
 from PyQt5.QtCore import  Qt
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QFileDialog, QTableWidget
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 from Ui_ModeSelect import Ui_Dialog
 from Ui_LabelMode import Ui_LabelModeWindow
 from Ui_InspectionMode import Ui_InspectionModeWindow
@@ -96,6 +96,7 @@ class Ui_MainWidget(QTableWidget):
         self.setColumnCount(area.cols)
         self.setRowCount(area.rows)
         
+        self.setShowGrid(False)
         self.setVerticalHeaderLabels(['A','B','C', 'D', 'E', 'F'])
         self.horizontalHeader().setVisible(False)
         self.horizontalHeader().setDefaultSectionSize(area.piece_size)
@@ -124,10 +125,12 @@ class Ui_MainWidget(QTableWidget):
         print(str(typeLabel))
         newItem = QtWidgets.QTableWidgetItem(g_labels[typeLabel][1])
         newItem.setTextAlignment(Qt.AlignCenter)
+        newItem.setForeground(QtGui.QColor('red'))
         self.setItem(x, y, newItem)
         g_record[x][y] = typeLabel
         if typeLabel == self.labelCnt:
             g_record[x][y] = -1
+        self.clearSelection()
     
     def clearAllLabels(self):
         for row in range(0, self.area.rows):
@@ -206,10 +209,12 @@ class Ui_MainWidget(QTableWidget):
 #####################################
 class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
     def __init__(self):        
-        self.area = MainAreaSize()       
-        self.fileIndex = 0
+        self.area = MainAreaSize()
         self.picDir = ''
         self.filePath = ''
+        self.fileList = []
+        self.fileCnt = 0
+        self.fileIndex = -1
         self.saveDir = 'E:/'
         super(LabelModeWindow,self).__init__()
         
@@ -242,11 +247,12 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
     # 打开文件夹
     def openPicDir(self):
          self.picDir = QFileDialog.getExistingDirectory(self, "打开图片文件夹", self.saveDir)
-         print(self.picDir)
-         self.fileList = os.listdir(self.picDir)
-         self.fileCnt = len(self.fileList)
-         self.fileIndex = -1
-         self.nextPic()
+         if os.path.isdir(self.picDir):
+            print(self.picDir)
+            self.fileList = os.listdir(self.picDir)
+            self.fileCnt = len(self.fileList)
+            self.fileIndex = -1
+            self.nextPic()
     
     # 选择保存目录
     def openSaveDir(self):
@@ -295,7 +301,7 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
         self.statusLabel.setText("开始保存")
         self.mainWidget.preparePieces(self.filePath)
         self.statusLabel.setText("保存结束")
-        self.mainWidget.nextPic()
+        self.nextPic()
         self.statusLabel.setText("")
         
 
@@ -353,8 +359,9 @@ if __name__ == '__main__':
     inspectionModeWindow = InspectionModeWindow()
     labelModeWindow = LabelModeWindow()
     dlg = ModeSelect()
-    dlg.setWindowFlags(Qt.WindowCloseButtonHint);
+    dlg.setWindowFlags(Qt.WindowCloseButtonHint)
     dlg.productBtn.clicked.connect(inspectionModeWindow.display)
     dlg.labelBtn.clicked.connect(partial(labelModeWindow.display, dlg))
+    dlg.labelBtn.setFocus()
     dlg.show()
     sys.exit(app.exec_())
