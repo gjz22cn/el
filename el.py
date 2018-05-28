@@ -88,7 +88,7 @@ class Ui_MainWidget(QTableWidget):
         #self.setObjectName("myQWidget")
         
         self.area = area
-        self.saveDir = 'C:/'
+        self.saveDir = 'E:/'
         self.dataDir = self.saveDir + '/el_data/'
         self.labelCnt = 13
         
