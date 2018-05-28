@@ -88,8 +88,8 @@ class Ui_MainWidget(QTableWidget):
         #self.setObjectName("myQWidget")
         
         self.area = area
-        self.saveDir = 'E:/'
-        self.dataDir = self.saveDir + 'el_data/'
+        self.saveDir = 'C:/'
+        self.dataDir = self.saveDir + '/el_data/'
         self.labelCnt = 13
         
         self.setGeometry(QtCore.QRect(0, 0, area.width, area.height))
@@ -110,7 +110,7 @@ class Ui_MainWidget(QTableWidget):
         
     def setSaveDir(self, saveDir):
         self.saveDir = saveDir
-        self.dataDir = self.saveDir + 'el_data/'
+        self.dataDir = self.saveDir + '/el_data/'
         self.prepareDir()
     
     def popLabelDialog(self, x, y):
