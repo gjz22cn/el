@@ -313,11 +313,31 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
 #####################################
 class InspectionModeWindow(QMainWindow,Ui_InspectionModeWindow):
     def __init__(self):
+        self.scanDir = 'E:/'
+        self.fileList = ''
         super(InspectionModeWindow,self).__init__()
-        self.setupUi(self)
+        
     
     def display(self):
+        self.setupUi(self)
+        self.scanButton.setFocus()
+        self.scanButton.clicked.connect(self.openScanDir)
         self.show()
+        
+    # 打开扫描文件夹
+    def openScanDir(self):
+        self.scanDir = QFileDialog.getExistingDirectory(self, "打开扫描文件夹", self.scanDir)
+        if os.path.isdir(self.scanDir):
+            print(self.scanDir)
+#            self.mainWidget.setSaveDir(self.scanDir)
+            self.scanDirectoryLabel.setText("扫描文件夹： "+self.scanDir)
+            self.fileList = os.listdir(self.scanDir)
+            self.fileCnt = len(self.fileList)
+            self.fileIndex = -1
+# =============================================================================
+#         else:
+#             self.saveDirLabel.setText("保存目录： 错误")
+# =============================================================================
         
 class ModeSelect(QDialog, Ui_Dialog):
     def __init__(self, parent=None):
