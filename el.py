@@ -9,13 +9,15 @@ import numpy as np
 import cv2
 from functools import partial
 
-from PyQt5.QtCore import  Qt
+from PyQt5.QtCore import  Qt, pyqtSignal
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QFileDialog, QTableWidget
 from PyQt5 import QtCore, QtGui, QtWidgets
 from Ui_ModeSelect import Ui_Dialog
 from Ui_LabelMode import Ui_LabelModeWindow
 from Ui_InspectionMode import Ui_InspectionModeWindow
 from Ui_LabelType import Ui_LabelTypeDialog
+
+from elClassify import ElClassify
 
 
 g_width = 4896
@@ -45,8 +47,11 @@ g_labels = [['0_good','良品'],
            ['10_heijiao', "黑角"], 
            ['11_liangban', "亮斑"], 
            ['12_huahen', "划痕"], 
-           ['', '']]
+           ['13_bad', "异常"], 
+           ['14_uncertain', '不确定']]
+    
 
+    
 class MainAreaSize():
     def __init__(self):
         self.pic_width = g_width
@@ -90,7 +95,7 @@ class Ui_MainWidget(QTableWidget):
         self.area = area
         self.saveDir = 'E:/'
         self.dataDir = self.saveDir + '/el_data/'
-        self.labelCnt = 13
+        self.labelCnt = 15
         
         self.setGeometry(QtCore.QRect(0, 0, area.width, area.height))
         self.setColumnCount(area.cols)
@@ -128,8 +133,6 @@ class Ui_MainWidget(QTableWidget):
         newItem.setForeground(QtGui.QColor('red'))
         self.setItem(x, y, newItem)
         g_record[x][y] = typeLabel
-        if typeLabel == self.labelCnt:
-            g_record[x][y] = -1
         self.clearSelection()
     
     def clearAllLabels(self):
@@ -140,6 +143,17 @@ class Ui_MainWidget(QTableWidget):
                 self.setItem(row, col, newItem)
                 
         self.initLabelRecord()
+    
+    def showAiResults(self, result):
+        for row in range(0, self.area.rows):
+            for col in range(0, self.area.cols):
+                type = int(result[row][col])
+                if (type == 0):
+                    continue
+                newItem = QtWidgets.QTableWidgetItem(g_labels[type][1])
+                newItem.setTextAlignment(Qt.AlignCenter)
+                newItem.setForeground(QtGui.QColor('red'))
+                self.setItem(row, col, newItem)
     
     def initLabelRecord(self):
         for row in range(0, self.area.rows):
@@ -208,6 +222,7 @@ class Ui_MainWidget(QTableWidget):
 #     heiht:   图片区域高度
 #####################################
 class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
+    newImgLoadedSignal = pyqtSignal()
     def __init__(self):        
         self.area = MainAreaSize()
         self.picDir = ''
@@ -216,7 +231,9 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
         self.fileCnt = 0
         self.fileIndex = -1
         self.saveDir = 'E:/'
+        self.dataDir = 'E:/el/'
         super(LabelModeWindow,self).__init__()
+
         
     def display(self, modeSelect):
         self.area = modeSelect.getAreaInfo()
@@ -236,6 +253,8 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
         self.prePicBtn.clicked.connect(self.prePic)
         self.nextPicBtn.clicked.connect(self.nextPic)
         
+        self.newImgLoadedSignal.connect(self.startAiProcess)
+        
         if os.path.isdir(self.saveDir):
             self.mainWidget.setSaveDir(self.saveDir)
             self.saveDirLabel.setText("保存目录： "+self.saveDir)
@@ -243,6 +262,7 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
             self.saveDirLabel.setText("保存目录： 错误")
         
         self.show()
+        self.el_classify = ElClassify(self.dataDir,  self.area)
     
     # 打开文件夹
     def openPicDir(self):
@@ -290,6 +310,15 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
         self.fileLabel.setText("文件名： "+self.filePath)
         self.mainWidget.clearAllLabels()
         
+        # start ai processing
+        self.statusLabel.setText("分析中")
+        self.newImgLoadedSignal.emit()
+    
+    def startAiProcess(self):
+        self.el_classify.processFile(self.filePath, g_record)
+        self.mainWidget.showAiResults(g_record)
+        self.statusLabel.setText("分析结束")
+        
     
     def getFilePathNameExt(self, filename):  
         (filepath,tempfilename) = os.path.split(filename);  
@@ -298,9 +327,7 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
     
     # 保存
     def savePieces(self):
-        self.statusLabel.setText("开始保存")
         self.mainWidget.preparePieces(self.filePath)
-        self.statusLabel.setText("保存结束")
         self.nextPic()
         self.statusLabel.setText("")
         

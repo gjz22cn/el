@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Project SYSTEM "Project-5.1.dtd">
+<!DOCTYPE Project SYSTEM "Project-6.0.dtd">
 <!-- eric project file for project el -->
-<!-- Saved: 2018-05-21, 23:42:33 -->
+<!-- Saved: 2018-06-03, 00:41:29 -->
 <!-- Copyright (C) 2018 james,  -->
-<Project version="5.1">
+<Project version="6.0">
   <Language>en_US</Language>
   <Hash>fff52f9db4c48b9a0d624dde0c5176d7dc1ed946</Hash>
   <ProgLanguage mixed="0">Python3</ProgLanguage>
@@ -20,6 +20,8 @@
     <Source>Ui_MainWidget.py</Source>
     <Source>Ui_ModeSelect.py</Source>
     <Source>__init__.py</Source>
+    <Source>el.py</Source>
+    <Source>elClassify.py</Source>
   </Sources>
   <Forms>
     <Form>InspectionMode.ui</Form>
@@ -28,10 +30,6 @@
     <Form>LabelWindow.ui</Form>
     <Form>ModeSelect.ui</Form>
   </Forms>
-  <Translations/>
-  <Resources/>
-  <Interfaces/>
-  <Others/>
   <MainScript>ModeSelect.py</MainScript>
   <Vcs>
     <VcsType>None</VcsType>
