@@ -1,20 +1,18 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'F:\code\python\el\LabelType.ui'
+# Form implementation generated from reading ui file 'E:\code\python\el\LabelType.ui'
 #
 # Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtCore import  Qt
 from functools import partial
 
 class Ui_LabelTypeDialog(object):
     def setupUi(self, LabelTypeDialog):
-        self.labelType = 13
+        self.labelType = 14
         self.LabelTypeDialog = LabelTypeDialog
-        LabelTypeDialog.setWindowFlags(Qt.WindowCloseButtonHint)
         LabelTypeDialog.setObjectName("LabelTypeDialog")
         LabelTypeDialog.resize(404, 206)
         LabelTypeDialog.setSizeGripEnabled(True)
@@ -57,13 +55,17 @@ class Ui_LabelTypeDialog(object):
         self.huahen = QtWidgets.QPushButton(LabelTypeDialog)
         self.huahen.setGeometry(QtCore.QRect(300, 150, 70, 25))
         self.huahen.setObjectName("huahen")
-        self.clear = QtWidgets.QPushButton(LabelTypeDialog)
-        self.clear.setGeometry(QtCore.QRect(300, 30, 70, 25))
-        self.clear.setObjectName("clear")
+        self.uncertain = QtWidgets.QPushButton(LabelTypeDialog)
+        self.uncertain.setGeometry(QtCore.QRect(300, 30, 70, 25))
+        self.uncertain.setObjectName("uncertain")
+        self.bad = QtWidgets.QPushButton(LabelTypeDialog)
+        self.bad.setGeometry(QtCore.QRect(120, 30, 70, 25))
+        self.bad.setObjectName("bad")
 
         self.retranslateUi(LabelTypeDialog)
         self.good.clicked.connect(LabelTypeDialog.close)
         QtCore.QMetaObject.connectSlotsByName(LabelTypeDialog)
+        
         self.setupButtonCallBack()
 
     def retranslateUi(self, LabelTypeDialog):
@@ -82,7 +84,8 @@ class Ui_LabelTypeDialog(object):
         self.heijiao.setText(_translate("LabelTypeDialog", "黑角"))
         self.liangban.setText(_translate("LabelTypeDialog", "亮斑"))
         self.huahen.setText(_translate("LabelTypeDialog", "划痕"))
-        self.clear.setText(_translate("LabelTypeDialog", "清除"))
+        self.uncertain.setText(_translate("LabelTypeDialog", "不确定"))
+        self.bad.setText(_translate("LabelTypeDialog", "异常"))
     
     def setupButtonCallBack(self):
         self.good.clicked.connect(partial(self.onButtonClick, 0))
@@ -98,16 +101,15 @@ class Ui_LabelTypeDialog(object):
         self.heijiao.clicked.connect(partial(self.onButtonClick, 10))
         self.liangban.clicked.connect(partial(self.onButtonClick, 11))
         self.huahen.clicked.connect(partial(self.onButtonClick, 12))
-        self.clear.clicked.connect(partial(self.onButtonClick, 13))
+        self.bad.clicked.connect(partial(self.onButtonClick, 13))
+        self.uncertain.clicked.connect(partial(self.onButtonClick, 14))
     
     def onButtonClick(self, n):
-        print(str(n))
         self.labelType = n
         self.LabelTypeDialog.close()
     
     def getLabelType(self):
         return self.labelType
-
 
 if __name__ == "__main__":
     import sys

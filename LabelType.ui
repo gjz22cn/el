@@ -185,7 +185,7 @@
     <string>划痕</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="clear">
+  <widget class="QPushButton" name="uncertain">
    <property name="geometry">
     <rect>
      <x>300</x>
@@ -195,7 +195,20 @@
     </rect>
    </property>
    <property name="text">
-    <string>清除</string>
+    <string>不确定</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="bad">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>30</y>
+     <width>70</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>异常</string>
    </property>
   </widget>
  </widget>

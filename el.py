@@ -93,7 +93,7 @@ class Ui_MainWidget(QTableWidget):
         #self.setObjectName("myQWidget")
         
         self.area = area
-        self.saveDir = 'E:/'
+        self.saveDir = 'E:/el'
         self.dataDir = self.saveDir + '/el_data/'
         self.labelCnt = 15
         
@@ -144,11 +144,14 @@ class Ui_MainWidget(QTableWidget):
                 
         self.initLabelRecord()
     
+    # 显示AI分析的结果
     def showAiResults(self, result):
         for row in range(0, self.area.rows):
             for col in range(0, self.area.cols):
                 type = int(result[row][col])
                 if (type == 0):
+                    # clear good pieces' label, let these pieces not be saved, unless user labeled it
+                    g_record[row][col] = -1
                     continue
                 newItem = QtWidgets.QTableWidgetItem(g_labels[type][1])
                 newItem.setTextAlignment(Qt.AlignCenter)
@@ -230,7 +233,7 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
         self.fileList = []
         self.fileCnt = 0
         self.fileIndex = -1
-        self.saveDir = 'E:/'
+        self.saveDir = 'E:/el'
         self.dataDir = 'E:/el/'
         super(LabelModeWindow,self).__init__()
 
@@ -314,6 +317,7 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
         self.statusLabel.setText("分析中")
         self.newImgLoadedSignal.emit()
     
+    # AI分析整张图片
     def startAiProcess(self):
         self.el_classify.processFile(self.filePath, g_record)
         self.mainWidget.showAiResults(g_record)
