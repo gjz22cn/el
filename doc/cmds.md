@@ -1,0 +1,2 @@
+python ./retrain.py --bottleneck_dir bottleneck --how_many_training_steps 4000 --model_dir model --output_graph el_graph_1.pb --output_labels el_labels_1.txt --image_dir data_step1 --saved_model_dir ./saved_models/1/
+python ./retrain.py --bottleneck_dir bottleneck --how_many_training_steps 4000 --model_dir model --output_graph el_graph_2.pb --output_labels el_labels_2.txt --image_dir data_step2 --saved_model_dir ./saved_models/2/
