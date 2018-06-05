@@ -8,6 +8,7 @@ import os
 import numpy as np
 import cv2
 from functools import partial
+import configparser
 
 from PyQt5.QtCore import  Qt, pyqtSignal
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QFileDialog, QTableWidget
@@ -19,7 +20,9 @@ from Ui_LabelType import Ui_LabelTypeDialog
 
 from elClassify import ElClassify
 
+sys.setrecursionlimit(5000)
 
+g_cfg = ''
 g_width = 4896
 g_height = 3034
 g_top_margin = 48
@@ -235,6 +238,8 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
         self.fileIndex = -1
         self.saveDir = 'E:/el'
         self.dataDir = 'E:/el/'
+        self.skipAiProcess = g_cfg.getBooleanCfgByKey('skip_ai')
+            
         super(LabelModeWindow,self).__init__()
 
         
@@ -319,8 +324,9 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
     
     # AI分析整张图片
     def startAiProcess(self):
-        self.el_classify.processFile(self.filePath, g_record)
-        self.mainWidget.showAiResults(g_record)
+        if not self.skipAiProcess:
+            self.el_classify.processFile(self.filePath, g_record)
+            self.mainWidget.showAiResults(g_record)
         self.statusLabel.setText("分析结束")
         
     
@@ -403,9 +409,17 @@ class ModeSelect(QDialog, Ui_Dialog):
     def getAreaInfo(self):
         return self.area
 
-
+class Configurations():
+    cfg_file = "E:/el/el.ini"
+    def __init__(self):
+        self.cf=configparser.ConfigParser()
+        self.cf.read(self.cfg_file)
+    
+    def getBooleanCfgByKey(self,  key):
+        return self.cf.getboolean('global',  key,  fallback=True)
     
 if __name__ == '__main__':
+    g_cfg = Configurations()
     app = QApplication(sys.argv)
     inspectionModeWindow = InspectionModeWindow()
     labelModeWindow = LabelModeWindow()
