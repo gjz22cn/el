@@ -105,7 +105,8 @@ class Ui_LabelTypeDialog(object):
         self.liangban.clicked.connect(partial(self.onButtonClick, 11))
         self.huahen.clicked.connect(partial(self.onButtonClick, 12))
         self.bad.clicked.connect(partial(self.onButtonClick, 13))
-        self.uncertain.clicked.connect(partial(self.onButtonClick, 14))
+        self.zangwu.clicked.connect(partial(self.onButtonClick, 14))
+        self.uncertain.clicked.connect(partial(self.onButtonClick, 15))
     
     def onButtonClick(self, n):
         self.labelType = n
