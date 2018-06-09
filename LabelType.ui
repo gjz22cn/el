@@ -188,7 +188,7 @@
   <widget class="QPushButton" name="uncertain">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>210</x>
      <y>30</y>
      <width>70</width>
      <height>25</height>
@@ -209,6 +209,19 @@
    </property>
    <property name="text">
     <string>异常</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="zangwu">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>30</y>
+     <width>70</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>脏污</string>
    </property>
   </widget>
  </widget>

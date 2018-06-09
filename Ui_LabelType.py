@@ -11,7 +11,7 @@ from functools import partial
 
 class Ui_LabelTypeDialog(object):
     def setupUi(self, LabelTypeDialog):
-        self.labelType = 14
+        self.labelType = 15
         self.LabelTypeDialog = LabelTypeDialog
         LabelTypeDialog.setObjectName("LabelTypeDialog")
         LabelTypeDialog.resize(404, 206)
@@ -56,14 +56,16 @@ class Ui_LabelTypeDialog(object):
         self.huahen.setGeometry(QtCore.QRect(300, 150, 70, 25))
         self.huahen.setObjectName("huahen")
         self.uncertain = QtWidgets.QPushButton(LabelTypeDialog)
-        self.uncertain.setGeometry(QtCore.QRect(300, 30, 70, 25))
+        self.uncertain.setGeometry(QtCore.QRect(210, 30, 70, 25))
         self.uncertain.setObjectName("uncertain")
         self.bad = QtWidgets.QPushButton(LabelTypeDialog)
         self.bad.setGeometry(QtCore.QRect(120, 30, 70, 25))
         self.bad.setObjectName("bad")
+        self.zangwu = QtWidgets.QPushButton(LabelTypeDialog)
+        self.zangwu.setGeometry(QtCore.QRect(300, 30, 70, 25))
+        self.zangwu.setObjectName("zangwu")
 
         self.retranslateUi(LabelTypeDialog)
-        self.good.clicked.connect(LabelTypeDialog.close)
         QtCore.QMetaObject.connectSlotsByName(LabelTypeDialog)
         
         self.setupButtonCallBack()
@@ -86,7 +88,8 @@ class Ui_LabelTypeDialog(object):
         self.huahen.setText(_translate("LabelTypeDialog", "划痕"))
         self.uncertain.setText(_translate("LabelTypeDialog", "不确定"))
         self.bad.setText(_translate("LabelTypeDialog", "异常"))
-    
+        self.zangwu.setText(_translate("LabelTypeDialog", "脏污"))
+
     def setupButtonCallBack(self):
         self.good.clicked.connect(partial(self.onButtonClick, 0))
         self.liefeng.clicked.connect(partial(self.onButtonClick, 1))

@@ -51,7 +51,8 @@ g_labels = [['0_good','良品'],
            ['11_liangban', "亮斑"], 
            ['12_huahen', "划痕"], 
            ['13_bad', "异常"], 
-           ['14_uncertain', '不确定']]
+           ['14_zangwu', '脏污'], 
+           ['15_uncertain', '不确定']]
     
 
     
@@ -98,7 +99,7 @@ class Ui_MainWidget(QTableWidget):
         self.area = area
         self.saveDir = 'E:/el'
         self.dataDir = self.saveDir + '/el_data/'
-        self.labelCnt = 15
+        self.labelCnt = len(g_labels)
         
         self.setGeometry(QtCore.QRect(0, 0, area.width, area.height))
         self.setColumnCount(area.cols)
@@ -236,6 +237,8 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
         self.fileList = []
         self.fileCnt = 0
         self.fileIndex = -1
+        self.picDir = 'E:/'
+        self.picName = ''
         self.saveDir = 'E:/el'
         self.dataDir = 'E:/el/'
         self.skipAiProcess = g_cfg.getBooleanCfgByKey('skip_ai')
@@ -270,7 +273,33 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
             self.saveDirLabel.setText("保存目录： 错误")
         
         self.show()
-        self.el_classify = ElClassify(self.dataDir,  self.area)
+        
+        if not self.skipAiProcess:
+            self.el_classify = ElClassify(self.dataDir,  self.area)
+        
+        self.openLastDirAndFile()
+        
+    def closeEvent(self, event):
+        g_cfg.setItem('global', 'pic_dir', self.picDir)
+        g_cfg.setItem('global', 'pic_name', self.picName)
+        g_cfg.save()
+        event.accept()
+    
+    def openLastDirAndFile(self):
+        pic_dir = g_cfg.getItem('global', 'pic_dir')
+        pic_name = g_cfg.getItem('global', 'pic_name')
+        print(pic_dir, pic_name)
+        if not os.path.isdir(pic_dir):
+            return
+            
+        self.picDir = pic_dir
+        self.fileList = os.listdir(self.picDir)
+        self.fileCnt = len(self.fileList)
+        self.fileIndex = -1
+        if pic_name in self.fileList:
+            self.fileIndex = self.fileList.index(pic_name) - 1
+        self.nextPic()
+        
     
     # 打开文件夹
     def openPicDir(self):
@@ -310,7 +339,8 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
         self.loadPic()
         
     def loadPic(self): 
-        self.filePath = self.picDir+'/'+self.fileList[self.fileIndex]
+        self.picName = self.fileList[self.fileIndex]
+        self.filePath = self.picDir+'/'+self.picName
         filepath,shortname,extension = self.getFilePathNameExt(self.filePath)
         if not extension == ".jpg":
             return
@@ -375,7 +405,7 @@ class InspectionModeWindow(QMainWindow,Ui_InspectionModeWindow):
 #         else:
 #             self.saveDirLabel.setText("保存目录： 错误")
 # =============================================================================
-        
+
 class ModeSelect(QDialog, Ui_Dialog):
     def __init__(self, parent=None):
         self.w = 8
@@ -417,6 +447,16 @@ class Configurations():
     
     def getBooleanCfgByKey(self,  key):
         return self.cf.getboolean('global',  key,  fallback=True)
+    
+    def getItem(self, section, key):
+        return self.cf.get(section, key)
+        
+    def setItem(self, section, key, value):
+        self.cf.set(section, key, value)
+    
+    def save(self):
+        with open(self.cfg_file, 'w') as f:
+            self.cf.write(f)
     
 if __name__ == '__main__':
     g_cfg = Configurations()
