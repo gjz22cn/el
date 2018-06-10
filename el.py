@@ -350,7 +350,11 @@ class LabelModeWindow(QMainWindow,Ui_LabelModeWindow):
         
         # start ai processing
         self.statusLabel.setText("分析中")
-        self.newImgLoadedSignal.emit()
+        #self.newImgLoadedSignal.emit()
+        if not self.skipAiProcess:
+            self.el_classify.processFile(self.filePath, g_record)
+            self.mainWidget.showAiResults(g_record)
+        self.statusLabel.setText("分析结束")
     
     # AI分析整张图片
     def startAiProcess(self):

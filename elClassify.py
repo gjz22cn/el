@@ -31,7 +31,7 @@ class ElClassify():
         
         # init sess 1
         self.graph1_dir = self.work_dir + 'save1/'
-        self.meta1 = self.graph1_dir +'model_complete.meta'
+        self.meta1 = self.graph1_dir +'model.meta'
         
         self.labels1 = []
         for label in tf.gfile.GFile(self.graph1_dir+'el_labels.txt'):
@@ -48,7 +48,7 @@ class ElClassify():
                 
         # init sess 2
         self.graph2_dir = self.work_dir + 'save2/'
-        self.meta2 = self.graph2_dir +'model_complete.meta'
+        self.meta2 = self.graph2_dir +'model.meta'
         
         self.labels2 = []
         for label in tf.gfile.GFile(self.graph2_dir+'el_labels.txt'):
